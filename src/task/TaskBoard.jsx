@@ -49,6 +49,11 @@ export default function TaskBoard() {
     setTask(taskAfterDelete)
   }
 
+  const hanedelDeleteALl = () => {
+    tasks.length = 0;
+    setTask([...tasks])
+  }
+
   return (
     <section className="mb-20" id="tasks">
       {showAddTaskModal && <AddTaskModal onSave={handelAddTask} taskToUpdate={taskToUpdate} handelCloseModel={handelCloseModel}/>}
@@ -60,6 +65,7 @@ export default function TaskBoard() {
         <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
           <TaskActions
             onAddClick={() => setShowAddTaskModal(!showAddTaskModal)}
+            onDeleteAll={hanedelDeleteALl}
           />
           (<TaskList tasks={tasks} onEdite={hanedelEditeTask} onDelate={handeleDelateTask} />)
         </div>
