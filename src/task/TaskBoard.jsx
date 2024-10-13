@@ -62,12 +62,19 @@ export default function TaskBoard() {
 
   }
 
+  const handelSerch = (searchTarm) => {
+    const filtered = tasks.filter(task => task.tittle.toLocaleLowerCase().includes(searchTarm.toLocaleLowerCase()))
+
+    setTask([...filtered])
+
+  }
+
   return (
     <section className="mb-20" id="tasks">
       {showAddTaskModal && <AddTaskModal onSave={handelAddTask} taskToUpdate={taskToUpdate} handelCloseModel={handelCloseModel}/>}
       <div className="container">
         <div className="p-2 flex justify-end">
-          <SearchTask />
+          <SearchTask onSearch={handelSerch} />
         </div>
 
         <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
