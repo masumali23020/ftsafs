@@ -53,6 +53,14 @@ export default function TaskBoard() {
     tasks.length = 0;
     setTask([...tasks])
   }
+  const handelFav = (taskId) => {
+    const taskIndex =tasks.findIndex(task => task.id === taskId);
+    const newTask = [...tasks];
+    newTask[taskIndex].isFavarite = !newTask[taskIndex].isFavarite;
+    setTask(newTask)
+
+
+  }
 
   return (
     <section className="mb-20" id="tasks">
@@ -67,7 +75,7 @@ export default function TaskBoard() {
             onAddClick={() => setShowAddTaskModal(!showAddTaskModal)}
             onDeleteAll={hanedelDeleteALl}
           />
-          (<TaskList tasks={tasks} onEdite={hanedelEditeTask} onDelate={handeleDelateTask} />)
+          (<TaskList onFav={handelFav} tasks={tasks} onEdite={hanedelEditeTask} onDelate={handeleDelateTask} />)
         </div>
       </div>
     </section>
