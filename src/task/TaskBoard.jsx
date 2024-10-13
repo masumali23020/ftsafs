@@ -44,6 +44,11 @@ export default function TaskBoard() {
     setTaskToUpdate(null)
   }
 
+  const handeleDelateTask = (taskId) => {
+    const taskAfterDelete = tasks.filter(task => task.id !== taskId)
+    setTask(taskAfterDelete)
+  }
+
   return (
     <section className="mb-20" id="tasks">
       {showAddTaskModal && <AddTaskModal onSave={handelAddTask} taskToUpdate={taskToUpdate} handelCloseModel={handelCloseModel}/>}
@@ -56,7 +61,7 @@ export default function TaskBoard() {
           <TaskActions
             onAddClick={() => setShowAddTaskModal(!showAddTaskModal)}
           />
-          (<TaskList tasks={tasks} onEdite={hanedelEditeTask} />)
+          (<TaskList tasks={tasks} onEdite={hanedelEditeTask} onDelate={handeleDelateTask} />)
         </div>
       </div>
     </section>
