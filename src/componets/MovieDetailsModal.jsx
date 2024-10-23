@@ -1,10 +1,10 @@
 import React from 'react'
 import { getImageUrl } from '../utlis/cine-utlitis'
 
-const MovieDetailsModal = ({onClose, Singlemovie}) => {
+const MovieDetailsModal = ({onClose, Singlemovie,onCardHanel}) => {
   
   const {price, description, genre, title,cover} = Singlemovie || {}
-  getImageUrl
+  
   
   return (
     <div
@@ -35,9 +35,11 @@ const MovieDetailsModal = ({onClose, Singlemovie}) => {
             <a
               className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
               href="#"
+              onClick={(event)=>onCardHanel(event, Singlemovie)}
             >
+              Add to Card | {price}
               <img src="./assets/tag.svg" alt="" />
-              <span>${price} | Add to Cart</span>
+            
             </a>
             <a
               className="border border-[#74766F] rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#6F6F6F] dark:text-gray-200 font-semibold text-sm"
