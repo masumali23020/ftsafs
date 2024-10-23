@@ -4,7 +4,11 @@ import logo from "../assets/logo.svg"
 import ring from "../assets/ring.svg"
 import cart from "../assets/shopping-cart.svg"
 
+  
+
+
 const Header = () => {
+  
   return (
     <header>
     <nav className="container flex items-center justify-between space-x-10 py-6">

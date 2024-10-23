@@ -1,16 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import tag from "../assets/tag.svg";
 import { getImageUrl } from "../utlis/cine-utlitis";
+import MovieDetailsModal from "./MovieDetailsModal";
 import Rating from "./Rating";
 
 const MoveCard = ({ movie }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(null)
+
+
+
   const { cover, title, genre, price, id, rating } = movie || {};
 
+  const handelModalClose = () => {
+    setSelectedMovie(null)
+    setShowModal(false)
+  }
+
+  const handelMoveSelected = (movei) => {
+    setSelectedMovie(movei)
+    setShowModal(true)
+  }
+
+
   return (
+    <>
+    {showModal && <MovieDetailsModal Singlemovie={selectedMovie} onClose={handelModalClose}  />}
     <figure
       className="p-4 border border-black/10 shadow-sm dark:border-white/10 rounded-xl"
       key={id}
     >
+      <a onClick={()=>handelMoveSelected(movie)}>
       <img
         className="w-full object-cover"
         src={getImageUrl(cover)}
@@ -30,7 +50,9 @@ const MoveCard = ({ movie }) => {
           <span>${price} | Add to Cart</span>
         </a>
       </figcaption>
+      </a>
     </figure>
+    </>
   );
 };
 
