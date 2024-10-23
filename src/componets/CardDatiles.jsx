@@ -2,9 +2,18 @@ import React, { useContext } from 'react';
 import deletx from "../assets/delete.svg";
 import checkOut from "../assets/icons/checkout.svg";
 import { MovieContext } from '../context';
+import { getImageUrl } from '../utlis/cine-utlitis';
 
 const CardDatiles = ({onClose}) => {
     const {cardData,setCartData} = useContext(MovieContext)
+
+    const onDelteItem = (event, itemId)=> {
+        event.preventDefault();
+        const filterItem = cardData.filter(item => item.id !== itemId)
+        
+        setCartData([...filterItem])
+
+    }
     
 
     
@@ -28,8 +37,10 @@ const CardDatiles = ({onClose}) => {
            <div className="flex items-center gap-4">
              <img
                className="rounded overflow-hidden"
-               src="/assets/cart-item.png"
+               src={getImageUrl(item.cover)}
                alt=""
+               width={"60px"}
+               height={"60px"}
              />
              <div>
                <h3 className="text-base md:text-xl font-bold">{item.title}</h3>
@@ -42,6 +53,7 @@ const CardDatiles = ({onClose}) => {
            <div className="flex justify-between gap-4 items-center">
              <button
                className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white"
+               onClick={(event) =>onDelteItem(event, item.id)}
              >
                <img className="w-5 h-5" src={deletx} alt="deleticon" />
                <span className="max-md:hidden">Remove</span>
