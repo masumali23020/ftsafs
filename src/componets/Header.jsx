@@ -1,14 +1,16 @@
 import React, { useContext, useState } from "react";
+import moon from "../assets/icons/moon.svg";
 import sun from "../assets/icons/sun.svg";
 import logo from "../assets/logo.svg";
 import ring from "../assets/ring.svg";
 import cart from "../assets/shopping-cart.svg";
-import { MovieContext } from "../context";
+import { MovieContext, ThemeContext } from "../context";
 import CardDatiles from "./CardDatiles";
 
 const Header = () => {
     const [showCard, setShowCard] = useState(false)
     const {cardData} = useContext(MovieContext)
+    const {them, setThem } = useContext(ThemeContext)
   
 
     const handelCardShow = () => {
@@ -38,8 +40,9 @@ const Header = () => {
             <a
               className="bg-primary/20 dark:bg-primary/[7%] rounded-lg backdrop-blur-[2px] p-1 inline-block"
               href="#"
+              onClick={()=> setThem(!them)}
             >
-              <img src={sun} width="24" height="24" alt="" />
+              <img src={them ? sun : moon} width="24" height="24" alt="" />
             </a>
           </li>
           <li>

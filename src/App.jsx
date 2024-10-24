@@ -1,24 +1,17 @@
 import { useState } from "react";
 import "./App.css";
-import { Footer } from "./componets/Footer";
-import Header from "./componets/Header";
-import MovieList from "./componets/MovieList";
-import Sideber from "./componets/Sideber";
-import { MovieContext } from "./context";
+import { MovieContext, ThemeContext } from "./context";
+import Home from "./page/Home";
 
 function App() {
-  const [cardData, setCartData] = useState([])
+  const [cardData, setCartData] = useState([]);
+  const [them, setThem] = useState(true);
   return (
     <>
-    <MovieContext.Provider value={{cardData,setCartData}} >
-      <Header />
-      <main>
-        <div className="container grid lg:grid-cols-[218px_1fr] gap-[3.5rem]">
-          <Sideber />
-          <MovieList />
-        </div>
-      </main>
-      <Footer />
+      <MovieContext.Provider value={{ cardData, setCartData }}>
+        <ThemeContext.Provider value={{ them, setThem }}>
+          <Home />
+        </ThemeContext.Provider>
       </MovieContext.Provider>
     </>
   );

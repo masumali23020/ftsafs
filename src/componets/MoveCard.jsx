@@ -28,7 +28,7 @@ const MoveCard = ({ movie }) => {
       return item.id === movie.id;
     });
     if (!found) {
-      setCartData([...cardData, ,]);
+   
       setCartData([...cardData, movie]);
       setShowModal(false)
     } else {
