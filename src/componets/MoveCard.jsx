@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { toast } from "react-toastify";
 import tag from "../assets/tag.svg";
 import { MovieContext } from "../context";
 import { getImageUrl } from "../utlis/cine-utlitis";
@@ -12,6 +13,7 @@ const MoveCard = ({ movie }) => {
   const {cartData} = state
 
   const { cover, title, genre, price, id, rating } = movie || {};
+  
 
   const handelModalClose = () => {
     setSelectedMovie(null);
@@ -38,9 +40,11 @@ const MoveCard = ({ movie }) => {
         
         }
       })
+      toast.success(`Movei ${movie.title} add succesfully`)
       setShowModal(false)
     } else {
-      <Error movie={movie} />;
+     
+      toast.error(`Movei ${movie.title}  somthing rong`)
     }
     // console.log(movie)
   };

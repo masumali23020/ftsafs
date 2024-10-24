@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { toast } from "react-toastify";
 import deletx from "../assets/delete.svg";
 import checkOut from "../assets/icons/checkout.svg";
 import { MovieContext } from "../context";
@@ -19,6 +20,7 @@ const CardDatiles = ({ onClose }) => {
       type: "Remove_Form_Cart", 
       payload: item
     });
+    toast.success(`Removed Movei ${item.title}  succesfully`)
   };
 
   return (
