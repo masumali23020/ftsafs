@@ -9,7 +9,8 @@ import CardDatiles from "./CardDatiles";
 
 const Header = () => {
     const [showCard, setShowCard] = useState(false)
-    const {cardData} = useContext(MovieContext)
+    const {state} = useContext(MovieContext)
+    const {cartData} = state 
     const {them, setThem } = useContext(ThemeContext)
   
 
@@ -21,7 +22,7 @@ const Header = () => {
     }
   return (
     <header>
-        {showCard && <CardDatiles onClose={handelCardClose} cardData={cardData} />}
+        {showCard && <CardDatiles onClose={handelCardClose} cardData={cartData} />}
       <nav className="container flex items-center justify-between space-x-10 py-6">
         <a href="index.html">
           <img src={logo} width="139" height="26" alt="" />
@@ -52,8 +53,8 @@ const Header = () => {
               onClick={handelCardShow}
             >
               <img src={cart} width="24" height="24" alt="" />
-              {cardData.length > 0 && (
-                <span> {cardData.length} </span>
+              {cartData.length > 0 && (
+                <span> {cartData.length} </span>
               )}
             </a>
           </li>

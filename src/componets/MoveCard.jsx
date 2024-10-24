@@ -8,7 +8,8 @@ import Rating from "./Rating";
 const MoveCard = ({ movie }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const { cardData, setCartData } = useContext(MovieContext);
+  const { state, dispatch } = useContext(MovieContext);
+  const {cartData} = state
 
   const { cover, title, genre, price, id, rating } = movie || {};
 
@@ -24,12 +25,19 @@ const MoveCard = ({ movie }) => {
 
   const handelAddToCard = ( event,movie) => {
     event.stopPropagation();
-    const found = cardData.find((item) => {
+    const found = cartData.find((item) => {
       return item.id === movie.id;
     });
     if (!found) {
-   
-      setCartData([...cardData, movie]);
+      
+      // dispatch([...cartData, movie]);
+      dispatch({
+        type: "Add_to_Cart",
+        payload:{
+          ...movie
+        
+        }
+      })
       setShowModal(false)
     } else {
       <Error movie={movie} />;

@@ -5,13 +5,20 @@ import { MovieContext } from "../context";
 import { getImageUrl } from "../utlis/cine-utlitis";
 
 const CardDatiles = ({ onClose }) => {
-  const { cardData, setCartData } = useContext(MovieContext);
+  const { state, dispatch } = useContext(MovieContext);
+  const {cartData} = state || []
 
-  const onDelteItem = (event, itemId) => {
+  console.log(cartData);
+  
+
+  const onDelteItem = (event, item) => {
     event.preventDefault();
-    const filterItem = cardData.filter((item) => item.id !== itemId);
+    
 
-    setCartData([...filterItem]);
+    dispatch({
+      type: "Remove_Form_Cart", 
+      payload: item
+    });
   };
 
   return (
@@ -22,7 +29,7 @@ const CardDatiles = ({ onClose }) => {
             Your Carts
           </h2>
           {
-          cardData.length === 0 ? (<p>No cart yet!</p>) : ( cardData.map((item) => (
+          cartData.length === 0 ? (<p>No cart yet!</p>) : ( cartData.map((item) => (
             <div
               key={item.id}
               className="space-y-8 lg:space-y-12 max-h-[450px] overflow-auto mb-10 lg:mb-14"
@@ -49,7 +56,7 @@ const CardDatiles = ({ onClose }) => {
                 <div className="flex justify-between gap-4 items-center">
                   <button
                     className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white"
-                    onClick={(event) => onDelteItem(event, item.id)}
+                    onClick={(event) => onDelteItem(event, item)}
                   >
                     <img className="w-5 h-5" src={deletx} alt="deleticon" />
                     <span className="max-md:hidden">Remove</span>
