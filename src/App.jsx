@@ -1,20 +1,21 @@
 import "./App.css";
 
-
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useReducer } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ProjectContext } from "./context";
 import Home from "./pages/Home";
+import { ProjectReducr, inttialProject } from "./reducer/ProjectReducer";
 
 function App() {
- 
- 
+  const [state, dispatch] = useReducer(ProjectReducr,inttialProject);
+
   return (
     <>
-     
-          <Home />
-          <ToastContainer  />
-      
-     
+      <ProjectContext.Provider value={{ state, dispatch }}>
+        <Home />
+        <ToastContainer />
+      </ProjectContext.Provider>
     </>
   );
 }

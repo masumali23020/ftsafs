@@ -1,18 +1,43 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { toast } from "react-toastify";
+import { ProjectContext } from "../../context";
 import AddModal from "../AddModal";
 
 const SubHeader = () => {
   const [showAddModal, setShowAddModal] = useState(false);
+
+  const { dispatch } = useContext(ProjectContext);
+
   const handelAdd = () => {
     setShowAddModal(true);
   };
-  const handelColse = ()=> {
-    setShowAddModal(false)
-  }
+  const handelColse = () => {
+    setShowAddModal(false);
+  };
+
+  const handelSve = (task) => {
+    console.log(task);
+    if (
+      !task.taskName ||
+      !task.description ||
+      !task.DueDate ||
+      !task.category
+    ) {
+      toast.error("All fields are required!");
+      setShowAddModal(true);
+    } else {
+      dispatch({
+        type: "ADD_PROJECT",
+        payload: task,
+      });
+      toast.success("succesful");
+      setShowAddModal(false);
+    }
+  };
   return (
     <>
       {" "}
-      {showAddModal && <AddModal onClose={handelColse} />}
+      {showAddModal && <AddModal onClose={handelColse} onSve={handelSve} />}
       <div className="mb-6 flex items-center justify-between">
         <h2 className="text-2xl font-bold">Projectify</h2>
 
